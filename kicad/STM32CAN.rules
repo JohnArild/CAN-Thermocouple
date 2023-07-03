@@ -1,0 +1,80 @@
+
+(rules PCB STM32CAN
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 2016)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 3.0)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.5)
+    )
+  )
+  (rule
+    (width 250.0)
+    (clear 200.2)
+    (clear 125.0 (type smd_to_turn_gap))
+    (clear 50.0 (type smd_smd))
+  )
+  (padstack "Via[0-1]_800:400_um"
+    (shape
+      (circle F.Cu 800.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 800.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_800:400_um" "Via[0-1]_800:400_um" default
+  )
+  (via 
+    "Via[0-1]_800:400_um-kicad_default" "Via[0-1]_800:400_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_800:400_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_800:400_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    +3V3 GNDREF "Net-(U1-PF0)" "Net-(U1-PF1)" "Net-(D1-K)" "/POWER_IN" "Net-(D2-A)" "Net-(U2-CANL)"
+    "/SPI_SCK" "/SPI_MOSI" "/SPI_MISO" "/SPI_NSS" "Net-(U2-CANH)" "/MCU_IO0" "Net-(J1-Pin_1)" "Net-(J1-Pin_2)"
+    /SWCLK "unconnected-(J2-Pad1)" /SWDIO "unconnected-(J3-Pin_6-Pad6)" /~{RESET} "unconnected-(J3-Pin_7-Pad7)" "/CAN_RXD" "/CAN_TXD"
+    "unconnected-(J3-Pin_8-Pad8)" /PA0 /PA1 /PA2 /PA3 "unconnected-(PS1-EN-Pad4)" "Net-(U1-PB8)" "unconnected-(U2-NC-Pad5)"
+    "unconnected-(U2-NC-Pad8)" "unconnected-(U3-N.C.-Pad8)"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)
